@@ -1287,11 +1287,13 @@ if __name__ == '__main__':
             if args.loop:
                 if input("\n[?] Выйти из скрипта (продолжить сканирование ТД)? [n/y] ").lower() == 'y':
                     print("Отмена…")
+                    os.system('clear')
                     break
                 else:
                     args.bssid = None
             else:
                 print("\nОтмена…")
+                os.system('clear')
                 break
 
     if args.iface_down:
