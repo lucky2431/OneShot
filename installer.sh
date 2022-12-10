@@ -12,13 +12,13 @@ echo "clear; cat /data/data/com.termux/files/home/OneShot/reports/stored.txt" > 
 chmod +x /data/data/com.termux/files/usr/bin/hack
 chmod +x /data/data/com.termux/files/usr/bin/hacked
 clear
-printf "#########################################################\n
-#  All done! Now you can run OneShot with\n
-#   sudo python3 OneShot/oneshot.py -i wlan0 -K or hack\n
-#\n
-#  To update, run\n
-#   (cd OneShot && git pull)\n
-#\n
-#  To see hacked networks:n
+printf "#########################################################
+#  All done! Now you can run OneShot with:
+#   sudo python3 OneShot/oneshot.py -i wlan0 -K or hack
+#
+#  To update, run:
+#   (cd OneShot && git pull)
+#
+#  To see hacked networks:
 #    hacked
 #########################################################\n"
