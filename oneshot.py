@@ -1044,7 +1044,7 @@ class WiFiScanner:
                 colored('WPS заблокирован', color='red'),
                 colored('Уже взломан', color='yellow')
             ))
-        print('Networks list:')
+        print('Список сетей:')
         print('{:<4} {:<18} {:<25} {:<8} {:<4} {:<27} {:<}'.format(
             '#', 'BSSID', 'ESSID', 'Sec.', 'PWR', 'WSC device name', 'WSC model'))
 
