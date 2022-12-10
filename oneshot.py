@@ -1045,8 +1045,8 @@ class WiFiScanner:
                 colored('Уже взломан', color='yellow')
             ))
         print('Список сетей:')
-        print('{:<4} {:<18} {:<25} {:<8} {:<4} {:<27} {:<}'.format(
-            '#', 'BSSID', 'ESSID', 'Sec.', 'PWR', 'WSC device name', 'WSC model'))
+        print('{:<4} {:<18} {:<25} {:<8} {:<4}'.format(
+            '#', 'BSSID', 'ESSID', 'PWR',))
 
         network_list_items = list(network_list.items())
         if args.reverse_scan:
@@ -1054,12 +1054,10 @@ class WiFiScanner:
         for n, network in network_list_items:
             number = f'{n})'
             model = '{} {}'.format(network['Model'], network['Model number'])
-            essid = truncateStr(network['ESSID'], 25)
+            essid = truncateStr(network['ESSID'], 25) if truncateStr(network['ESSID'], 25) == '' else 'Скрытый'
             deviceName = truncateStr(network['Device name'], 27)
-            line = '{:<4} {:<18} {:<25} {:<8} {:<4} {:<27} {:<}'.format(
-                number, network['BSSID'], essid,
-                network['Security type'], network['Level'],
-                deviceName, model
+            line = '{:<4} {:<18} {:<25} {:<8}'.format(
+                number, network['BSSID'], essid, network['Level']
             )
             if (network['BSSID'], network['ESSID']) in self.stored:
                 print(colored(line, color='yellow'))
