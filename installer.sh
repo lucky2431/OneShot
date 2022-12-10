@@ -9,7 +9,7 @@ chmod +x OneShot/oneshot.py
 
 echo "#!/bin/bash
 cd OneShot
-sudo python3 OneShot/oneshot.py -i wlan0 -K" > /usr/local/bin/hack
-chmod +x /usr/local/bin/hack
+sudo python3 OneShot/oneshot.py -i wlan0 -K" > /data/data/com.termux/files/usr/bin/hack
+chmod +x /data/data/com.termux/files/usr/bin/hack
 clear
-printf "###############################################\n#  All done! Now you can run OneShot with\n#   sudo python3 OneShot/oneshot.py -i wlan0 -K or hack\n#\n#  To update, run\n#   (cd OneShot && git pull)\n###############################################\n"
+printf "#########################################################\n#  All done! Now you can run OneShot with\n#   sudo python3 OneShot/oneshot.py -i wlan0 -K or hack\n#\n#  To update, run\n#   (cd OneShot && git pull)\n#########################################################\n"
