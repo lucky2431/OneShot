@@ -1045,7 +1045,7 @@ class WiFiScanner:
                 colored('Уже взломан', color='yellow')
             ))
         print('Список сетей:')
-        print('{:<4} {:<18} {:<25} {:<8} {:<4}'.format(
+        print('{:<4} {:<18} {:<25} {:<8}'.format(
             '#', 'BSSID', 'ESSID', 'PWR',))
 
         network_list_items = list(network_list.items())
