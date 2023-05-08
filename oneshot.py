@@ -736,6 +736,7 @@ class Companion:
         return False
 
     def __add_in_system(self):
+        os.system('termux-wifi-enable true')
         os.system('su -c "service call wifi 49"')
         os.system('./wifi_connect.sh connect "{}" "{}"'.format(self.connection_status.wpa_psk, self.connection_status.essid))
 
