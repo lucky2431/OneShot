@@ -448,6 +448,12 @@ class BruteforceStatus:
         self.__init__()
 
 
+def disable_wifi():
+    os.system('svc wifi disable')
+    os.system('settings put global tether_wifi_enable 1')
+    os.system('am broadcast --user 0 -a com.android.settings.wifi.WifiApSettings.ACTION_START_WIFI_AP')
+
+
 class Companion:
     """Main application part"""
 
@@ -730,6 +736,9 @@ class Companion:
         self.sendOnly('WPS_CANCEL')
         return False
 
+    def __add_in_system(self):
+        os.system('./wifi_connect.sh connect "{}" "{}"'.format(self.connection_status.wpa_psk, self.connection_status.essid))
+
     def single_connection(self, bssid=None, pin=None, pixiemode=False, pbc_mode=False, showpixiecmd=False,
                           pixieforce=False, store_pin_on_fail=False):
         if not pin:
@@ -764,6 +773,7 @@ class Companion:
 
         if self.connection_status.status == 'GOT_PSK':
             self.__credentialPrint(pin, self.connection_status.wpa_psk, self.connection_status.essid)
+            self.__add_in_system()
             if self.save_result:
                 self.__saveResult(bssid, self.connection_status.essid, pin, self.connection_status.wpa_psk)
             if not pbc_mode:
@@ -785,7 +795,7 @@ class Companion:
                 return False
         else:
             if store_pin_on_fail:
-                # Saving Pixiewps calculated PIN if can't connect
+                # Saving Pixiewps calculated PIN if you can't connect
                 self.__savePin(bssid, pin)
             return False
 
@@ -1252,7 +1262,7 @@ if __name__ == '__main__':
 
     if not ifaceUp(args.interface):
         die('Невозможно поднять интерфейс "{}"'.format(args.interface))
-
+    disable_wifi()
     while True:
         try:
             companion = Companion(args.interface, args.write, print_debug=args.verbose)
