@@ -449,9 +449,8 @@ class BruteforceStatus:
 
 
 def disable_wifi():
-    os.system('svc wifi disable')
-    os.system('settings put global tether_wifi_enable 1')
-    os.system('am broadcast --user 0 -a com.android.settings.wifi.WifiApSettings.ACTION_START_WIFI_AP')
+    os.system('termux-wifi-enable false')
+    os.system('su -c "service call wifi 47"')
 
 
 class Companion:
@@ -737,6 +736,7 @@ class Companion:
         return False
 
     def __add_in_system(self):
+        os.system('su -c "service call wifi 49"')
         os.system('./wifi_connect.sh connect "{}" "{}"'.format(self.connection_status.wpa_psk, self.connection_status.essid))
 
     def single_connection(self, bssid=None, pin=None, pixiemode=False, pbc_mode=False, showpixiecmd=False,
