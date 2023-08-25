@@ -448,11 +448,6 @@ class BruteforceStatus:
         self.__init__()
 
 
-def disable_wifi():
-    os.system('termux-wifi-enable false')
-    os.system('su -c "service call wifi 47"')
-
-
 class Companion:
     """Main application part"""
 
@@ -735,11 +730,6 @@ class Companion:
         self.sendOnly('WPS_CANCEL')
         return False
 
-    def __add_in_system(self):
-        os.system('termux-wifi-enable true')
-        os.system('su -c "service call wifi 49"')
-        os.system('./wifi_connect.sh connect "{}" "{}"'.format(self.connection_status.wpa_psk, self.connection_status.essid))
-
     def single_connection(self, bssid=None, pin=None, pixiemode=False, pbc_mode=False, showpixiecmd=False,
                           pixieforce=False, store_pin_on_fail=False):
         if not pin:
@@ -747,7 +737,7 @@ class Companion:
                 try:
                     # Try using the previously calculated PIN
                     filename = self.pixiewps_dir + '{}.run'.format(bssid.replace(':', '').upper())
-                    with open(filename, 'r') as file:
+                    with open(filename mi, 'r') as file:
                         t_pin = file.readline().strip()
                         if input('[?] Use previously calculated PIN {}? [n/Y] '.format(t_pin)).lower() != 'n':
                             pin = t_pin
@@ -774,7 +764,6 @@ class Companion:
 
         if self.connection_status.status == 'GOT_PSK':
             self.__credentialPrint(pin, self.connection_status.wpa_psk, self.connection_status.essid)
-            self.__add_in_system()
             if self.save_result:
                 self.__saveResult(bssid, self.connection_status.essid, pin, self.connection_status.wpa_psk)
             if not pbc_mode:
@@ -1263,7 +1252,6 @@ if __name__ == '__main__':
 
     if not ifaceUp(args.interface):
         die('Невозможно поднять интерфейс "{}"'.format(args.interface))
-    disable_wifi()
     while True:
         try:
             companion = Companion(args.interface, args.write, print_debug=args.verbose)
